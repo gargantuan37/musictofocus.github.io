@@ -1,0 +1,385 @@
+/* Basic Reset and Global Styles */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    /* NEW: Smaller base font size for better fit */
+    font-size: 14px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+h2,
+h3 {
+    color: #3498db;
+    margin-top: 0;
+    margin-bottom: 8px;
+    /* Reduced margin */
+    border-bottom: 1px solid #34495e;
+    padding-bottom: 4px;
+    /* Reduced padding */
+    font-size: 1.1em;
+    /* Slightly smaller headings */
+}
+
+/* App Container - Fixed 4 Quadrant Layout */
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100vh;
+    width: 100vw;
+    gap: 8px;
+    /* Reduced gap */
+    padding: 8px;
+    /* Reduced padding */
+}
+
+.quadrant {
+    border: 1px solid #34495e;
+    border-radius: 6px;
+    /* Slightly smaller radius */
+    padding: 10px;
+    /* Reduced padding */
+    background-color: #34495e;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Smaller shadow */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.info-quadrant {
+    /* Specific styles for info/actions quadrant if needed */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Space between player details and actions */
+}
+
+.player-details-section,
+.actions-section {
+    overflow-y: auto;
+    /* Allow scrolling within these sections if content overflows */
+    padding-right: 10px;
+    /* Space for scrollbar */
+}
+
+.player-details-section::-webkit-scrollbar,
+.actions-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.player-details-section::-webkit-scrollbar-thumb,
+.actions-section::-webkit-scrollbar-thumb {
+    background-color: #2c3e50;
+    border-radius: 4px;
+}
+
+
+/* Poker Table and Player Slots */
+.poker-table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    /* Reduced gap for slots */
+    padding: 5px;
+    /* Reduced padding for table area */
+    background-color: #2c3e50;
+    border-radius: 4px;
+    flex-grow: 1;
+    overflow-y: auto;
+    align-content: start;
+    /* min-height: auto; /* Let content define height, or set a smaller specific min-height if needed */
+    /* For a quadrant of approx 438x232, and padding/gap, the table area will be smaller.
+       Let's assume table area is roughly 400x200 after parent padding.
+       Each row height would be (200 - 2*gap) / 3.
+    */
+}
+
+.poker-table::-webkit-scrollbar {
+    width: 5px;
+    /* Thinner scrollbar */
+}
+
+.poker-table::-webkit-scrollbar-thumb {
+    background-color: #4a6572;
+    /* Lighter thumb */
+    border-radius: 2px;
+}
+
+.player-slot {
+    border: 1px solid #4a6572;
+    /* Thinner border */
+    padding: 5px;
+    /* Reduced padding */
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    /* Reduced gap */
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    align-self: stretch;
+    /* Make slots fill their grid cell height */
+    justify-self: stretch;
+    min-height: 60px;
+    /* Significantly reduced min-height */
+    font-size: 0.9em;
+    /* Smaller font inside slots */
+}
+
+.player-slot.active-slot {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.7);
+}
+
+.player-name-input {
+    width: 100%;
+    padding: 4px;
+    /* Reduced padding */
+    border: 1px solid #bdc3c7;
+    border-radius: 2px;
+    font-size: 0.95em;
+    /* Relative to slot font size */
+    background-color: #fff;
+    color: #2c3e50;
+    transition: background-color 0.3s;
+}
+
+.player-name-input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.player-stats-inputs {
+    display: flex;
+    gap: 3px;
+    /* Reduced gap */
+}
+
+.player-stats-inputs .stat-input {
+    flex-grow: 1;
+    width: 30%;
+    padding: 3px;
+    /* Reduced padding */
+    font-size: 0.85em;
+    /* Relative to slot font size */
+    text-align: center;
+    border: 1px solid #bdc3c7;
+    border-radius: 2px;
+    background-color: #f8f9f9;
+    color: #34495e;
+}
+
+.player-stats-inputs .stat-input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Search Results Dropdown */
+.search-results-dropdown {
+    position: absolute;
+    top: calc(100% - 2px);
+    /* Adjust based on input height */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #bdc3c7;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    z-index: 1000;
+    max-height: 100px;
+    /* Reduced max height */
+    overflow-y: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+    /* Smaller font for results */
+}
+
+.search-results-dropdown::-webkit-scrollbar {
+    width: 5px;
+}
+
+.search-results-dropdown::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 2px;
+}
+
+
+.search-result-item {
+    padding: 5px 8px;
+    /* Reduced padding */
+    cursor: pointer;
+    color: #2c3e50;
+}
+
+.search-result-item:hover {
+    background-color: #e9ecef;
+}
+
+.search-result-item.highlighted {
+    /* For keyboard navigation if implemented */
+    background-color: #3498db;
+    color: white;
+}
+
+
+/* Player Info Section (Quadrant 4) - Adjustments for smaller overall font */
+.notes-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    /* Reduced gap */
+    align-items: center;
+}
+
+.notes-grid label {
+    font-size: 0.85em;
+    /* Smaller labels */
+    color: #bdc3c7;
+    text-align: right;
+    padding-right: 4px;
+}
+
+.notes-grid textarea {
+    width: 100%;
+    padding: 5px;
+    /* Reduced padding */
+    border: 1px solid #4a6572;
+    border-radius: 3px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-size: 0.9em;
+    /* Smaller text in notes */
+    resize: vertical;
+}
+
+.notes-grid textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Actions Section (Quadrant 4) */
+.color-palette-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #bdc3c7;
+    font-size: 0.9em;
+}
+
+.color-palette {
+    gap: 6px;
+    /* Reduced gap */
+}
+
+.color-button {
+    width: 30px;
+    height: 30px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    /* Circular buttons */
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.color-button.selected {
+    border-color: #fff;
+    /* White border for selected color */
+    transform: scale(1.15);
+    box-shadow: 0 0 5px #fff;
+}
+
+/* Specific colors for buttons */
+.color-button[data-color="red"] {
+    background-color: red;
+}
+
+.color-button[data-color="blue"] {
+    background-color: blue;
+}
+
+.color-button[data-color="green"] {
+    background-color: green;
+}
+
+.color-button[data-color="yellow"] {
+    background-color: yellow;
+}
+
+.color-button[data-color="orange"] {
+    background-color: orange;
+}
+
+.color-button[data-color="purple"] {
+    background-color: purple;
+}
+
+.color-button[data-color="pink"] {
+    background-color: pink;
+}
+
+.color-button[data-color="lightblue"] {
+    background-color: lightblue;
+}
+
+.color-button[data-color="lightgreen"] {
+    background-color: lightgreen;
+}
+
+.color-button[data-color="white"] {
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+
+#add-name-btn {
+    padding: 10px 15px;
+    background-color: #27ae60;
+    /* Green for add */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+#add-name-btn:hover:not(:disabled) {
+    background-color: #2ecc71;
+}
+
+#add-name-btn:disabled {
+    background-color: #7f8c8d;
+    /* Greyed out when disabled */
+    cursor: not-allowed;
+}
+
+.status-message {
+    margin-top: 10px;
+    font-size: 0.9em;
+    min-height: 1.2em;
+    /* Reserve space for message */
+}
+
+.status-message.success {
+    color: #2ecc71;
+    /* Green for success */
+}
+
+.status-message.error {
+    color: #e74c3c;
+    /* Red for error */
+}
