@@ -39,7 +39,7 @@ h4 {
 .quadrant {
     border: 1px solid #34495e;
     border-radius: 6px;
-    padding: 2px;
+    padding: 10px;
     background-color: #34495e;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     display: flex;

@@ -475,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Nếu có, không nên tạo mới mà chỉ cần thông báo.
         const existingPlayerInSlot = activeSlotElement.dataset.playerId ? playersDB.find(p => p.id === activeSlotElement.dataset.playerId) : null;
         if (existingPlayerInSlot && existingPlayerInSlot.name === playerName) {
-            displayStatusMessage("Người chơi này đã có trong slot. Để đổi màu, chỉ cần chọn màu từ dropdown.", true); return;
+             displayStatusMessage("Người chơi này đã có trong slot. Để đổi màu, chỉ cần chọn màu từ dropdown.", true); return;
         }
         // Nếu tên nhập vào trùng với một người chơi đã có trong DB nhưng *không* phải người trong slot hiện tại,
         // người dùng nên sử dụng chức năng tìm kiếm để gán, thay vì "Add Name" để tránh tạo trùng.
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Cập nhật thông báo, chỉ rõ rằng notes đã được làm trống
         displayStatusMessage(`Thêm người chơi: ${newPlayer.name}. Ghi chú đã được làm trống.`, false);
-
+        
         // updateAddNameButtonState() đã được gọi bên trong assignPlayerToSlot hoặc sẽ được gọi bởi setActiveSlot.
         // Gọi lại ở đây không hại nhưng có thể thừa.
 
